@@ -11,14 +11,16 @@ import java.util.Scanner;
 public class Main2 {
 
     public static void main(String[] args) {
-        printMatrix();
-    }
 
-    public static void printMatrix(){
+        System.out.print("Введите размер массива: ");
 
         Scanner in = new Scanner( System.in );
 
-        System.out.print("Введите размер массива: ");
+        printMatrix( in );
+
+    }
+
+    public static void printMatrix( Scanner in ){
 
         int count = in.nextInt();
 
@@ -50,7 +52,7 @@ public class Main2 {
         int result = 0;
 
         for( int i = 0; i < arr.length; i++ ){
-            for( int j = 0; j < arr.length; j++ ){
+            for( int j = 0; j < i + 1; j++ ){
                 if( arr[i][j] <= values ){
                     if( result < arr[i][j] ){
                         result = arr[i][j];

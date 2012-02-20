@@ -20,22 +20,21 @@ public class Employee {
     }
 
     public Employee( String name, String position ){
-        this.id++;
-        this.name = name;
-        this.position = position;
-        this.salary = 6000;
 
-        if( position.equals("worker") ){
-            this.salary = 5000;
-        }
+        Employee.id++;
+        this.name = name;
+        this.salary = position.equals("worker")  ? 5000 : 6000;
+        this.position = position;
 
     }
 
     public Employee( String name, String position, double salary ){
-        this.id++;
+
+        Employee.id++;
         this.name = name;
         this.position = position;
         this.salary = salary;
+
     }
 
     public int getId(){

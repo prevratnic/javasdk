@@ -11,18 +11,19 @@ import java.util.Scanner;
 public class Main1 {
 
     public static void main( String[] args ){
-        new Main1().sortNumber();
-    }
-
-    public void sortNumber(){
 
         Scanner scanner = new Scanner( System.in );
-
-        int tmp;
 
         int a = scanner.nextInt();
         int b = scanner.nextInt();
         int c = scanner.nextInt();
+
+        sortNumber( a, b, c );
+    }
+
+    public static void sortNumber( int a, int b, int c ){
+
+        int tmp;
 
         if( a > b ){
            tmp = a;
