@@ -8,15 +8,18 @@ package lesson1.ams;
 
 public class Fish extends Animal {
 
+    @Override
     public String moves() {
         return "swim";
     }
 
+    @Override
     public String sound() {
-        return null;
+        return "nothing";
     }
 
+    @Override
     public String output() {
-        return null;
+        return "class Fish";
     }
 }

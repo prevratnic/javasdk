@@ -9,9 +9,7 @@ package lesson1.ams;
 public abstract class Animal {
 
      public abstract String moves();
-
      public abstract String sound();
-
      public abstract String output();
 
 }

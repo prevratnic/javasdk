@@ -15,11 +15,11 @@ public class Bird extends Animal {
 
     @Override
     public String sound() {
-        return null;
+        return "Chirp";
     }
 
     @Override
     public String output() {
-        return null;
+        return "class Bird";
     }
 }

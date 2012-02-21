@@ -9,11 +9,12 @@ package lesson1.emp;
 
 public class Employee {
 
-    private static int id;
+    private int id;
     private String name;
     private String position;
     private double salary;
-
+    
+    private static int count = 1;
 
     public Employee( String name ){
         this(name, "worker", 5000);
@@ -21,7 +22,7 @@ public class Employee {
 
     public Employee( String name, String position ){
 
-        Employee.id++;
+        this.id = Employee.count++;
         this.name = name;
         this.salary = position.equals("worker")  ? 5000 : 6000;
         this.position = position;
@@ -30,7 +31,7 @@ public class Employee {
 
     public Employee( String name, String position, double salary ){
 
-        Employee.id++;
+        this.id = Employee.count++;
         this.name = name;
         this.position = position;
         this.salary = salary;
@@ -67,10 +68,11 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "emp { " +
-                "name='" + name + '\'' +
-                ", position='" + position + '\'' +
-                ", salary=" + salary +
+        return  " emp { "+ "\t"+
+                " id=" + id + "\t"+
+                " name='" + name + '\''+",\t"+
+                " position='" + position + '\''+",\t"+
+                " salary=" + salary +
                 " }" + "\n";
     }
 

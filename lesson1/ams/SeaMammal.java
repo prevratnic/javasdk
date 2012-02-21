@@ -15,11 +15,11 @@ public class SeaMammal extends Mammal {
 
     @Override
     public String sound() {
-        return null;
+        return "Sea sound";
     }
 
     @Override
     public String output() {
-        return null;
+        return "class SeaMammal";
     }
 }

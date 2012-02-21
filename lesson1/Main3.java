@@ -35,13 +35,13 @@ public class Main3 {
 
    public static void sumSalary( Employee[] emp ){
 
-       double result = 0;
+       double sum = 0;
        double sal = 0;
        String pos = null;
 
         for( int i = 0; i < emp.length; i++ ){
 
-            result += emp[i].getSalary();
+            sum += emp[i].getSalary();
 
             if( sal < emp[i].getSalary() ){
                 sal = emp[i].getSalary();
@@ -49,7 +49,7 @@ public class Main3 {
             }
         }
 
-       System.out.print("Сумма по зарплате: " + result + " " + pos + " " + sal );
+       System.out.print("Сумма по зарплате: " + sum + " " + pos + " " + sal );
 
    }
 
