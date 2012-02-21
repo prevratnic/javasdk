@@ -8,6 +8,18 @@ package lesson1.ams;
 
 public class Fish extends Animal {
 
+    //private String str;
+
+    public Fish(){
+        super();
+    }
+
+/*
+    public Fish( String str ){
+        this.str = str;
+    }
+*/
+
     @Override
     public String moves() {
         return "swim";
@@ -20,6 +32,7 @@ public class Fish extends Animal {
 
     @Override
     public String output() {
-        return "class Fish";
+//        return this.str;
+        return moves() + " " + sound();
     }
 }

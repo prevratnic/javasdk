@@ -21,7 +21,7 @@ public class Main3 {
         employee[4] = new Employee("Tanya", "Manager");
         employee[5] = new Employee("Nina", "Prodovech", 200);
         employee[6] = new Employee("Sveta");
-        employee[7] = new Employee("Olecya", "not_worker");
+        employee[7] = new Employee("Dasha", "not_worker");
         employee[8] = new Employee("Nina", "Prodovech", 300);
         employee[9] = new Employee("Sveta");
 
