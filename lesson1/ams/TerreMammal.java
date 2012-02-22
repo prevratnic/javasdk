@@ -18,8 +18,4 @@ public class TerreMammal extends Mammal {
         return "Terre sound";
     }
 
-    @Override
-    public String output() {
-        return "class TerreMammal";
-    }
 }

@@ -7,9 +7,18 @@ package lesson1.ams;
  */
 
 public abstract class Animal {
+    
+    private String name;
 
-     public abstract String moves();
-     public abstract String sound();
-     public abstract String output();
+    public Animal(String name){
+        this.name = name;
+    }
+
+    public abstract String moves();
+    public abstract String sound();
+
+    public String output(){
+        return name + " " + this.getClass().toString() ;
+    }
 
 }

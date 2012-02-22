@@ -18,8 +18,4 @@ public class SeaMammal extends Mammal {
         return "Sea sound";
     }
 
-    @Override
-    public String output() {
-        return "class SeaMammal";
-    }
 }

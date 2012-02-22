@@ -8,6 +8,10 @@ package lesson1.ams;
 
 public class Bird extends Animal {
 
+    public Bird(){
+        super("My name Bird");
+    }
+
     @Override
     public String moves() {
         return "fly";
@@ -18,8 +22,4 @@ public class Bird extends Animal {
         return "Chirp";
     }
 
-    @Override
-    public String output() {
-        return "class Bird";
-    }
 }

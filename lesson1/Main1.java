@@ -11,6 +11,8 @@ import java.util.Scanner;
 public class Main1 {
 
     public static void main( String[] args ){
+        
+        System.out.println("Введите 3 числа :");
 
         Scanner scanner = new Scanner( System.in );
 

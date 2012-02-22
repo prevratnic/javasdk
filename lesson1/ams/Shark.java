@@ -7,6 +7,10 @@ package lesson1.ams;
  */
 public class Shark extends Animal {
 
+    public Shark(){
+        super("My class Shark");
+    }
+
     @Override
     public String moves() {
         return null;
@@ -14,11 +18,6 @@ public class Shark extends Animal {
 
     @Override
     public String sound() {
-        return null;
-    }
-
-    @Override
-    public String output() {
         return null;
     }
 }

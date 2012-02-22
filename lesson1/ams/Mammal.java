@@ -7,4 +7,7 @@ package lesson1.ams;
  */
 
 public abstract class Mammal extends Animal {
+    public Mammal(){
+        super( "My group Mammal" );
+    }
 }
