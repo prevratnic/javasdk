@@ -1,8 +1,7 @@
 package lesson2;
 
 import lesson2.contener.Matrix;
-
-import java.util.Scanner;
+import lesson2.contener.Vector;
 
 /**
  * Author: Ilya Varlamov aka privr@tnik
@@ -54,8 +53,22 @@ public class Main1 {
             Matrix out = matrix_1.add( matrix_2 );
             out.output();
 */
+   //         matrix_1.write( "test.txt" );
 
-            System.out.print( matrix_1.equal( matrix_2 ) );
+  //          Matrix matrix_3 = new Matrix(2, 3);
+  //          matrix_3.read( 3, 3, "test.txt" );
+
+  //          System.out.print( matrix_1.equal( matrix_2 ) );
+            
+            Vector vector = new Vector(5);
+            vector.addItem( 1 );
+            vector.addItem( 2 );
+            vector.addItem( 3 );
+            vector.addItem( 4 );
+            vector.addItem( 5 );
+            vector.output();
+
+            System.out.println( vector.length() );
 
         } catch ( Exception e ){
             e.printStackTrace();

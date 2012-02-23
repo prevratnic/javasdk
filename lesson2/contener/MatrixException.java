@@ -6,5 +6,8 @@ package lesson2.contener;
  * Time: 18:31
  */
 
-public class MatrixException {
+public class MatrixException extends Exception {
+    MatrixException(){
+        super("Error matrix size");
+    }
 }

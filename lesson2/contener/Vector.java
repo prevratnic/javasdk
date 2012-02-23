@@ -6,5 +6,22 @@ package lesson2.contener;
  * Time: 21:48
  */
 
-public class Vector {
+public class Vector extends Matrix {
+
+    public Vector( int m ){
+        super( m, 1 );
+    }
+
+    public double length(){
+
+        double result = 0;
+
+        for( int i = 0; i < getM(); i++ ){
+            for( int j = 0; j < getN(); j++ ){
+                result += Math.pow( getIndex( i, j ), 2 );
+            }
+        }
+
+        return Math.sqrt( result );
+    }
 }
