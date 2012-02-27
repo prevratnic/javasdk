@@ -55,8 +55,9 @@ public class Main1 {
 */
    //         matrix_1.write( "test.txt" );
 
-  //          Matrix matrix_3 = new Matrix(2, 3);
-  //          matrix_3.read( 3, 3, "test.txt" );
+            Matrix matrix_3 = new Matrix(2, 3);
+            matrix_3.read( 2, 3, "test.txt" );
+            matrix_3.output();
 
   //          System.out.print( matrix_1.equal( matrix_2 ) );
             
@@ -66,9 +67,9 @@ public class Main1 {
             vector.addItem( 3 );
             vector.addItem( 4 );
             vector.addItem( 5 );
-            vector.output();
+      //      vector.output();
 
-            System.out.println( vector.length() );
+         //   System.out.println( vector.length() );
 
         } catch ( Exception e ){
             e.printStackTrace();

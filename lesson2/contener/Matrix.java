@@ -132,14 +132,14 @@ public class Matrix {
             reader = new FileReader( globalPath + filename );
             int tmp = 0;
 
-            do{
+            while( tmp != -1 ){
                 tmp = reader.read();
 
-                if( tmp != -1 ){
-                    addItem((char) tmp);
+                if( !(tmp == 32 || tmp == 10 || tmp == -1) ){
+                    addItem( Character.getNumericValue( tmp ) );
                 }
 
-            }while( tmp != -1 );
+            }
 
         }catch (FileNotFoundException e){
             e.printStackTrace();
