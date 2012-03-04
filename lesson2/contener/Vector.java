@@ -8,7 +8,7 @@ package lesson2.contener;
 
 public class Vector extends Matrix {
 
-    public Vector( int m ){
+    public Vector( int m ) throws Exception {
         super( m, 1 );
     }
 

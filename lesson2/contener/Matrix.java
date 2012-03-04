@@ -22,11 +22,15 @@ public class Matrix {
 
     private final String globalPath = "/Volumes/Home/privratnik/Desktop/";
 
-    public Matrix( int m, int n ){
-        this.m = m;
-        this.n = n;
+    public Matrix( int m, int n ) throws Exception {
+        if( m > -1 && n > -1 ){
+            this.m = m;
+            this.n = n;
 
-        this.matrix = new int[ m ][ n ];
+            this.matrix = new int[ m ][ n ];
+        }else{
+            throw new Exception("Error indexes");
+        }
     }
     
     public int getM() {
@@ -67,18 +71,20 @@ public class Matrix {
     public Matrix add( Matrix sumMatrix ) throws Exception {
 
         Matrix result = null;
-
-        if( (m == sumMatrix.m) && (n == sumMatrix.n) ){
-            result = new Matrix( m, n );
-
-            for( int i = 0; i < m; i++ ){
-                for( int j = 0; j < n; j++ ){
-                    result.addItem( (this.matrix[i][j]) + (sumMatrix.matrix[i][j]) );
+        
+        if( sumMatrix != null ){
+            if( (m == sumMatrix.m) && (n == sumMatrix.n) ){
+                result = new Matrix( m, n );
+    
+                for( int i = 0; i < m; i++ ){
+                    for( int j = 0; j < n; j++ ){
+                        result.addItem( (this.matrix[i][j]) + (sumMatrix.matrix[i][j]) );
+                    }
                 }
+    
+            }else {
+                throw new MatrixException();
             }
-
-        }else {
-            throw new MatrixException();
         }
 
         return result;
@@ -87,13 +93,15 @@ public class Matrix {
     public boolean equal( Matrix eqMatrix ){
 
         boolean flag = false;
-
-        if( (m != eqMatrix.m) || (n != eqMatrix.n) ) return false;
-
-        for( int i = 0; i < m; i++ ){
-            for( int j = 0; j < n; j++ ){
-                flag = this.matrix[i][j] == eqMatrix.matrix[i][j];
-                if( !flag ) return false;
+        
+        if( eqMatrix != null ){
+            if( (m != eqMatrix.m) || (n != eqMatrix.n) ) return false;
+    
+            for( int i = 0; i < m; i++ ){
+                for( int j = 0; j < n; j++ ){
+                    flag = this.matrix[i][j] == eqMatrix.matrix[i][j];
+                    if( !flag ) return false;
+                }
             }
         }
 

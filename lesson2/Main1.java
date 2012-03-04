@@ -32,6 +32,8 @@ public class Main1 {
             }
         }
 */
+        try{
+
         Matrix matrix_1 = new Matrix( 2, 3 );
         matrix_1.addItem( 1 );
         matrix_1.addItem( 2 );
@@ -48,7 +50,7 @@ public class Main1 {
         matrix_2.addItem( 2 );
         matrix_2.addItem( 1 );
 
-        try{
+
 /*
             Matrix out = matrix_1.add( matrix_2 );
             out.output();
