@@ -19,8 +19,8 @@ public class Main4 {
         animal[4] = new Shark();
         animal[5] = new Whale();
 
-        for( int i = 0; i < animal.length; i++ ){
-            System.out.println( animal[i].output() );
+        for( Animal anl : animal ){
+            System.out.println( anl.output() );
         }
 
     }

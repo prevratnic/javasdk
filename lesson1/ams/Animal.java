@@ -18,7 +18,7 @@ public abstract class Animal {
     public abstract String sound();
 
     public String output(){
-        return name + " " + this.getClass().toString() ;
+        return name + " " + this.getClass().toString();
     }
 
 }

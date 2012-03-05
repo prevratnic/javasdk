@@ -36,10 +36,10 @@ public class DrawPrimitive extends JPanel {
 
     private Shape randomShape(){
 
-        double x = ( 20 / ( Math.random() % 3 ) );
-        double y = ( 20 / ( Math.random() % 3 ) );
-        double width = ( 50 / ( Math.random() % 2 ) );
-        double height = ( 50 / ( Math.random() % 2 ) );
+        double x = ( 10 * ( Math.random() * 10 ) + 1 );
+        double y = ( 10 * ( Math.random() * 30 ) + 1 );
+        double width = ( 50 * ( Math.random() * 2 ) + 1 );
+        double height = ( 50 * ( Math.random() * 2 ) + 1 );
 
         int result = (int) ( Math.random() * 3 );
         
