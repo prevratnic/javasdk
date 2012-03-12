@@ -29,7 +29,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     private double point_h = 180;
     
     private int alpha = 128;
-    private final int SHIFT = 10;
+    private final int SHIFT = 20;
 
     public ButtonPanel(){
         initButton();
@@ -97,16 +97,24 @@ public class ButtonPanel extends JPanel implements ActionListener {
         Object source = event.getSource();
 
             if ( source == buttonUp ){
-                this.moveTo(0, -10, 0, -10, buttonUp );
+                if( point_y > 100 ){
+                    this.moveTo(0, -10, 0, -10, buttonUp );
+                }
             }
             if( source == buttonDown ){
-                this.moveTo(0, 10, 0, 10, buttonDown);
+                if( point_y < 320 ){
+                    this.moveTo(0, 10, 0, 10, buttonDown);
+                }
             }
             if( source == buttonLeft ){
-                this.moveTo(-10, 0, -10, 0, buttonLeft);
+                if( point_x > 20 ){
+                    this.moveTo(-10, 0, -10, 0, buttonLeft);
+                }
             }
             if( source == buttonRight ){
-                this.moveTo(10, 0, 10, 0, buttonRight);
+                if( point_x < 170 ){
+                    this.moveTo(10, 0, 10, 0, buttonRight);
+                }
             }
             if( source == buttonLighter ){
                 this.setLighter();
@@ -120,12 +128,10 @@ public class ButtonPanel extends JPanel implements ActionListener {
 
     private void moveTo( double x, double y, double width, double height, JButton button ){
 
-        //if( (point_x - x) > 20 && point_y > 100 && point_x < 170 && point_y < 320){
-            this.point_x += x; //((point_x - x) > 20) ? x : 20;
-            this.point_y += y;
-            this.point_w += width;
-            this.point_h += height;
-        //}
+        this.point_x += x;
+        this.point_y += y;
+        this.point_w += width;
+        this.point_h += height;
 
         this.setTextHint( button );
     }
