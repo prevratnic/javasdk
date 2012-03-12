@@ -18,19 +18,19 @@ public class DrawPrimitive extends JPanel {
         this.setBackground( Color.LIGHT_GRAY );
     }
 
+    @Override
     protected void paintComponent(Graphics g){
 
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D)g;
 
+        BasicStroke stroke = new BasicStroke( 5 );
+        g2.setStroke(stroke);
+
         for (int i = 0; i < 12; i++ ){
-
-            BasicStroke stroke = new BasicStroke( 5 );
-            g2.setStroke(stroke);
-            g2.setPaint(randomColor());
+            g2.setPaint( randomColor() );
             g2.draw( randomShape() );
-
         }
     }
 

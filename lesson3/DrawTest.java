@@ -17,7 +17,7 @@ public class DrawTest {
         frame = new JFrame();
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         frame.setTitle("DrawTest");
-        frame.setSize(600, 600);
+        frame.setSize(300, 400);
         frame.setContentPane( new DrawPrimitive() );
         frame.setVisible( true );
     }
