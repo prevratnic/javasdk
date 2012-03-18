@@ -100,26 +100,21 @@ public class ButtonPanel extends JPanel implements ActionListener {
                 if( point_y > 100 ){
                     this.moveTo(0, -10, 0, -10, buttonUp );
                 }
-            }
-            if( source == buttonDown ){
+            } else if( source == buttonDown ){
                 if( point_y < 320 ){
                     this.moveTo(0, 10, 0, 10, buttonDown);
                 }
-            }
-            if( source == buttonLeft ){
+            } else if( source == buttonLeft ){
                 if( point_x > 20 ){
                     this.moveTo(-10, 0, -10, 0, buttonLeft);
                 }
-            }
-            if( source == buttonRight ){
+            } else if( source == buttonRight ){
                 if( point_x < 170 ){
                     this.moveTo(10, 0, 10, 0, buttonRight);
                 }
-            }
-            if( source == buttonLighter ){
+            } else if( source == buttonLighter ){
                 this.setLighter();
-            }
-            if( source == buttonDarker ){
+            } else if( source == buttonDarker ){
                 this.setDarker();
             }
 
