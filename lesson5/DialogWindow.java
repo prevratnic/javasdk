@@ -124,6 +124,7 @@ public class DialogWindow implements ActionListener {
                 if( user == User.STUDENT ){
                     try{
                         int age = Integer.valueOf( secondInput.getText() );
+                        if( age < 16 || age > 80 ) return false;
                         universityArray[ counter++ ] = new Student( firstInput.getText(), age );
 
                         this.clearField();

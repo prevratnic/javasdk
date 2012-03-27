@@ -10,17 +10,12 @@ import javax.swing.*;
 
 public class DrawWindow {
 
-    private JFrame jFrame;
-
-    private int WIDTH = 400;
-    private int HEIGHT = 400;
-
     public DrawWindow(){
-        jFrame = new JFrame();
+        JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         jFrame.setTitle("Lab 4");
         jFrame.setContentPane( new ButtonPanel() );
-        jFrame.setSize( WIDTH, HEIGHT );
+        jFrame.setSize( 400, 400 );
         jFrame.setResizable( false );
         jFrame.setVisible(true);
     }
