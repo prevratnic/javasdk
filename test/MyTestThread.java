@@ -9,13 +9,11 @@ package test;
 public class MyTestThread {
     public static void main(String... args){
 
-        Semaphore semaphore = new Semaphore(1);
-
-        TestDateBase dateBase = new TestDateBase( semaphore );
+        TestDateBase dateBase = new TestDateBase();
 
         for(int i = 1; i < 5; i++){
-            new TestReaders(dateBase, i, semaphore);
-            new TestWriters(dateBase, i, semaphore);
+            new TestReaders(dateBase, i);
+            new TestWriters(dateBase, i);
         }
 
     }
@@ -26,57 +24,46 @@ class TestDateBase {
     private int readerCount;
     private boolean dbReading;
     private boolean dbWriting;
-    private Semaphore semaphore;
-
-    public TestDateBase(Semaphore semaphore){
-        this.semaphore = semaphore;
-    }
+    private Semaphore read = new Semaphore(1);
+    private Semaphore write = new Semaphore(1);
 
     public void startRead(){
-        if(dbWriting){
+        read.P();
+            if(dbWriting){
+                write.P();
+            }
 
-//            try {
-//                wait(); // todo: thread waiting for execution Write
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-        }
+            readerCount++;
 
-        readerCount++;
-
-        if(readerCount == 1){
-            dbReading = true;
-        }
+            if(readerCount == 1){
+                dbReading = true;
+            }
+        read.V();
     }
 
     public void endRead(){
+        read.P();
+            readerCount--;
 
-        readerCount--;
-
-        if( readerCount == 0 ){
-            dbReading = false;
-        }
-
-     //   notifyAll();
-
+            if( readerCount == 0 ){
+                dbReading = false;
+                write.V();
+            }
+        read.V();
     }
 
-    public synchronized void startWrite(){
+    public void startWrite(){
+        write.P();
         if( dbReading || dbWriting ){
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            write.P();
         }
 
         dbWriting = true;
-
     }
 
-    public synchronized void endWrite(){
+    public void endWrite(){
         dbWriting = false;
-        notifyAll();
+        write.V();
     }
 
     public static void sleepTime(){
@@ -92,13 +79,11 @@ class TestDateBase {
 class TestReaders implements Runnable{
 
     private TestDateBase dateBase;
-    private Semaphore semaphore;
     private int indexThread;
 
-    public TestReaders( TestDateBase dateBase, int indexThread, Semaphore semaphore ){
+    public TestReaders( TestDateBase dateBase, int indexThread ){
 
         this.dateBase = dateBase;
-        this.semaphore = semaphore;
         this.indexThread = indexThread;
 
         new Thread( this, this.getClass().getName() ).start();
@@ -107,18 +92,16 @@ class TestReaders implements Runnable{
     @Override
     public void run() {
         for(int i = 0; i < 5; i++){
-            semaphore.P();
-                System.out.println("Поток Readers № " + indexThread + " спит");
-                TestDateBase.sleepTime();
+            System.out.println("Поток Readers № " + indexThread + " спит");
+            TestDateBase.sleepTime();
 
-                dateBase.startRead();
-                System.out.println("    Поток Readers № " + indexThread + " начал чтение");
+            dateBase.startRead();
+            System.out.println("    Поток Readers № " + indexThread + " начал чтение");
 
-                TestDateBase.sleepTime();
+            TestDateBase.sleepTime();
 
-                dateBase.endRead();
-                System.out.println("    Поток Readers № " + indexThread + " закончил чтение");
-            semaphore.V();
+            dateBase.endRead();
+            System.out.println("    Поток Readers № " + indexThread + " закончил чтение");
         }
     }
 }
@@ -126,13 +109,11 @@ class TestReaders implements Runnable{
 class TestWriters implements Runnable {
 
     private TestDateBase dateBase;
-    private Semaphore semaphore;
     private int indexThread;
 
-    public TestWriters( TestDateBase dateBase, int indexThread, Semaphore semaphore ){
+    public TestWriters( TestDateBase dateBase, int indexThread ){
 
         this.dateBase = dateBase;
-        this.semaphore = semaphore;
         this.indexThread = indexThread;
 
         new Thread( this, this.getClass().getName() ).start();
@@ -141,18 +122,16 @@ class TestWriters implements Runnable {
     @Override
     public void run() {
         for(int i = 0; i < 5; i++){
-          //  semaphore.P();
-                System.out.println("Поток № Writers " + indexThread + " спит");
-                TestDateBase.sleepTime();
+            System.out.println("Поток № Writers " + indexThread + " спит");
+            TestDateBase.sleepTime();
 
-                dateBase.startWrite();
-                System.out.println("    Поток Writers № " + indexThread + " начал чтение");
+            dateBase.startWrite();
+            System.out.println("    Поток Writers № " + indexThread + " начал чтение");
 
-                TestDateBase.sleepTime();
+            TestDateBase.sleepTime();
 
-                dateBase.endWrite();
-                System.out.println("    Поток Writers № " + indexThread + " закончил чтение");
-          //  semaphore.V();
+            dateBase.endWrite();
+            System.out.println("    Поток Writers № " + indexThread + " закончил чтение");
         }
     }
 
