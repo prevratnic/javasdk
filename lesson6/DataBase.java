@@ -1,5 +1,7 @@
 package lesson6;
 
+import javax.swing.*;
+
 /**
  * Author: Ilya Varlamov aka privr@tnik
  * Date: 25.03.12
@@ -11,16 +13,15 @@ public class DataBase {
     private int readerCount;
     private boolean dbReading;
     private boolean dbWriting;
-
     private Semaphore semaphore;
 
-    public DataBase(){
+    public DataBase( Semaphore semaphore ){
         this.readerCount = 0;
         this.dbReading = false;
         this.dbWriting = false;
     }
     
-    public int startRead(){
+    public synchronized int startRead(){
 
         while (dbWriting) {
             try {
@@ -40,21 +41,33 @@ public class DataBase {
 
     }
 
-    public int endRead(){
+    public synchronized int endRead(){
         --readerCount;
         if( readerCount == 0 )
             dbReading = false;
-        System.err.println("Reader is done reading. Count = " + readerCount);
+
+        System.err.println( "Reader is done reading. Count = " + readerCount ); //todo
 
         return readerCount;
     }
 
-    public void startWrite(){
+    public synchronized void startWrite(){
+
+       while (dbReading || dbWriting) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        dbWriting = true;
 
     }
 
-    public void endWrite(){
-
+    public synchronized void endWrite(){
+        dbWriting = false;
+        notifyAll();
     }
 
     public static void timeSleep(){

@@ -1,5 +1,9 @@
 package lesson6;
 
+import javax.swing.*;
+
+import java.awt.*;
+
 import static lesson6.DataBase.*;
 
 /**
@@ -31,22 +35,26 @@ public class Readers implements Runnable {
         int count = 0;
         
         for(int i = 0; i < 3; i++){
-            System.err.println("Reader " + indexThread + " is sleeping.");
+
+            System.err.println( "Reader " + indexThread + " is sleeping." ); // todo
 
             timeSleep();
 
-            semaphore.P();
             // Critical section
-            count = dataBase.startRead();
+          //  semaphore.P();
+                count = dataBase.startRead();
+         //   semaphore.V();
 
-            System.err.println("Reader " + indexThread + " wants to read.");
-            System.err.println("Reader " + indexThread + " is reading. Reader Count = " + count);
+            // Not critical section
+                System.err.println( "Reader " + indexThread + " wants to read." );
+                System.err.println( "Reader " + indexThread + " is reading. Reader Count = " + count );
 
             timeSleep();
 
-            count = dataBase.endRead();
-            // Not critical section
-            semaphore.V();
+         //   semaphore.P();
+                count = dataBase.endRead();
+         //   semaphore.V();
+
         }
     }
     

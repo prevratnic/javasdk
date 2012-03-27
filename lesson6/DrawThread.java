@@ -12,7 +12,7 @@ public class DrawThread {
     
     private JFrame jFrame;
     private JPanel jPanel;
-    
+
     public DrawThread(){
         jFrame = new JFrame();
         jFrame.setTitle( "zzz- I/O" );
@@ -21,8 +21,8 @@ public class DrawThread {
 
         this.initScrollPanel();
 
-        jFrame.setResizable( false );
         jFrame.setVisible( true );
+
     }
 
     private void initScrollPanel(){
@@ -33,5 +33,6 @@ public class DrawThread {
         
         jFrame.add( jScrollPane );
     }
-    
+
+
 }
