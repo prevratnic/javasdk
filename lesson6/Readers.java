@@ -1,9 +1,5 @@
 package lesson6;
 
-import javax.swing.*;
-
-import java.awt.*;
-
 import static lesson6.DataBase.*;
 
 /**
@@ -13,49 +9,29 @@ import static lesson6.DataBase.*;
  */
 
 public class Readers implements Runnable {
-    
+
     private DataBase dataBase;
-    private Semaphore semaphore;
     private int indexThread;
 
-    public Readers(int indexThread, DataBase dataBase, Semaphore semaphore){
-        
-        this.indexThread = indexThread;
+    public Readers( DataBase dataBase, int indexThread ){
+
         this.dataBase = dataBase;
-        this.semaphore = semaphore;
-        
-        Thread thread = new Thread( this, "Readers" );
-        thread.start();
-        
+        this.indexThread = indexThread;
+
+        new Thread( this, this.getClass().getName() ).start();
     }
 
     @Override
     public void run() {
-        
-        int count = 0;
-        
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < 2; i++){
+            sleepTime();
+            dataBase.startRead();
+            System.out.println("Поток Readers № " + indexThread + " начал чтение");
 
-            System.err.println( "Reader " + indexThread + " is sleeping." ); // todo
-
-            timeSleep();
-
-            // Critical section
-          //  semaphore.P();
-                count = dataBase.startRead();
-         //   semaphore.V();
-
-            // Not critical section
-                System.err.println( "Reader " + indexThread + " wants to read." );
-                System.err.println( "Reader " + indexThread + " is reading. Reader Count = " + count );
-
-            timeSleep();
-
-         //   semaphore.P();
-                count = dataBase.endRead();
-         //   semaphore.V();
-
+            sleepTime();
+            dataBase.endRead();
+            System.out.println("Поток Readers № " + indexThread + " закончил чтение");
         }
     }
-    
+
 }

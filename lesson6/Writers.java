@@ -1,9 +1,5 @@
 package lesson6;
 
-import javax.swing.*;
-
-import java.awt.*;
-
 import static lesson6.DataBase.*;
 
 /**
@@ -15,43 +11,27 @@ import static lesson6.DataBase.*;
 public class Writers implements Runnable {
 
     private DataBase dataBase;
-    private Semaphore semaphore;
     private int indexThread;
 
-    public Writers(int indexThread, DataBase dataBase, Semaphore semaphore){
+    public Writers( DataBase dataBase, int indexThread ){
 
-        this.indexThread = indexThread;
-        this.semaphore = semaphore;
         this.dataBase = dataBase;
+        this.indexThread = indexThread;
 
-        Thread thread = new Thread( this, "Writers");
-        thread.start();
-
+        new Thread( this, this.getClass().getName() ).start();
     }
 
     @Override
     public void run() {
-        for( int i = 0; i < 3; i++ ){
+        for(int i = 0; i < 2; i++){
+            sleepTime();
+            dataBase.startWrite();
+            System.out.println("Поток Writers № " + indexThread + " начал чтение");
 
-            System.err.println( "Writer " + indexThread + " is sleeping." );
-
-            timeSleep();
-            System.err.println( "Writer " + indexThread + " wants to write." );
-
-            //semaphore.P();
-                dataBase.startWrite();
-            //semaphore.V();
-
-            System.err.println( "               writer " + indexThread + " is writing." );
-
-            timeSleep();
-            System.err.println( "               writer " + indexThread + " is done writing." );
-
-            //semaphore.P();
-                dataBase.endWrite();
-            //semaphore.V();
-
+            sleepTime();
+            dataBase.endWrite();
+            System.out.println("Поток Writers № " + indexThread + " закончил чтение");
         }
     }
-    
+
 }

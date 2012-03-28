@@ -1,7 +1,5 @@
 package lesson6;
 
-import javax.swing.*;
-
 /**
  * Author: Ilya Varlamov aka privr@tnik
  * Date: 25.03.12
@@ -10,69 +8,47 @@ import javax.swing.*;
 
 public class DataBase {
 
+    private ReadSemaphore read;
+    private WriteSemaphore write;
+
     private int readerCount;
     private boolean dbReading;
     private boolean dbWriting;
-    private Semaphore semaphore;
 
-    public DataBase( Semaphore semaphore ){
-        this.readerCount = 0;
-        this.dbReading = false;
-        this.dbWriting = false;
+    public DataBase(){
+        read = new ReadSemaphore(1);
+        write = new WriteSemaphore(1);
     }
     
-    public synchronized int startRead(){
-
-        while (dbWriting) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        ++readerCount;
-        
-        if( readerCount == 1 ){
-            dbReading = true;
-        }
-
-        return readerCount;
-
+    public void startRead(){
+        write.P();
+            read.P();
+        write.V();
+        readerCount++;
+        dbReading = true;
     }
 
-    public synchronized int endRead(){
-        --readerCount;
-        if( readerCount == 0 )
-            dbReading = false;
-
-        System.err.println( "Reader is done reading. Count = " + readerCount ); //todo
-
-        return readerCount;
+    public void endRead(){
+        readerCount--;
+        read.V();
     }
 
-    public synchronized void startWrite(){
-
-       while (dbReading || dbWriting) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
+    public void startWrite(){
+        write.P();
+            read.check();
         dbWriting = true;
 
     }
 
-    public synchronized void endWrite(){
+    public void endWrite(){
+
         dbWriting = false;
-        notifyAll();
+        write.V();
     }
 
-    public static void timeSleep(){
+    public static void sleepTime(){
         try {
-            Thread.sleep( (int)(Math.random() * 3000) );
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
