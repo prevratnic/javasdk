@@ -1,7 +1,5 @@
 package lesson6;
 
-import javax.swing.*;
-
 /**
  * Author: Ilya Varlamov aka privr@tnik
  * Date: 25.03.12
@@ -14,7 +12,7 @@ public class Main {
 
         DataBase dataBase = new DataBase();
 
-        for( int i = 1; i < 2; i++ ){
+        for( int i = 1; i < 10; i++ ){
             new Readers( dataBase, i );
             new Writers( dataBase, i );
         }

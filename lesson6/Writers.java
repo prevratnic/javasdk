@@ -23,14 +23,14 @@ public class Writers implements Runnable {
 
     @Override
     public void run() {
-        for(int i = 0; i < 2; i++){
+        for(int i = 0; i < 5; i++){
             sleepTime();
             dataBase.startWrite();
             System.out.println("Поток Writers № " + indexThread + " начал чтение");
 
             sleepTime();
-            dataBase.endWrite();
             System.out.println("Поток Writers № " + indexThread + " закончил чтение");
+            dataBase.endWrite();
         }
     }
 

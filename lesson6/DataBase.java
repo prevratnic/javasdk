@@ -8,47 +8,45 @@ package lesson6;
 
 public class DataBase {
 
-    private ReadSemaphore read;
-    private WriteSemaphore write;
+    Semaphore readLock;
+    Semaphore readWriteLock;
 
     private int readerCount;
-    private boolean dbReading;
-    private boolean dbWriting;
 
-    public DataBase(){
-        read = new ReadSemaphore(1);
-        write = new WriteSemaphore(1);
-    }
-    
-    public void startRead(){
-        write.P();
-            read.P();
-        write.V();
-        readerCount++;
-        dbReading = true;
+    public DataBase() {
+        readLock = new Semaphore(1);
+        readWriteLock = new Semaphore(1);
     }
 
-    public void endRead(){
-        readerCount--;
-        read.V();
+    public void startRead() {
+        readLock.P();
+            if(readerCount == 0) {
+                readWriteLock.P();
+            }
+           readerCount++;
+        //readLock.V();      // todo: ask teacher question
     }
 
-    public void startWrite(){
-        write.P();
-            read.check();
-        dbWriting = true;
-
+    public void endRead() {
+        //readLock.P();
+            readerCount--;
+            if(readerCount == 0) {
+              readWriteLock.V();
+            }
+        readLock.V();
     }
 
-    public void endWrite(){
-
-        dbWriting = false;
-        write.V();
+    public void startWrite() {
+        readWriteLock.P();
     }
 
-    public static void sleepTime(){
+    public void endWrite() {
+        readWriteLock.V();
+    }
+
+    public static void sleepTime() {
         try {
-            Thread.sleep(100);
+            Thread.sleep((int)(Math.random() * 1000));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -23,14 +23,14 @@ public class Readers implements Runnable {
 
     @Override
     public void run() {
-        for(int i = 0; i < 2; i++){
+        for(int i = 0; i < 5; i++){
             sleepTime();
             dataBase.startRead();
             System.out.println("Поток Readers № " + indexThread + " начал чтение");
 
             sleepTime();
-            dataBase.endRead();
             System.out.println("Поток Readers № " + indexThread + " закончил чтение");
+            dataBase.endRead();
         }
     }
 
