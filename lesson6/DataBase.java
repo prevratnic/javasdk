@@ -20,15 +20,15 @@ public class DataBase {
 
     public void startRead() {
         readLock.P();
-            if(readerCount == 0) {
+            readerCount++;
+            if(readerCount == 1) {
                 readWriteLock.P();
             }
-           readerCount++;
-        //readLock.V();      // todo: ask teacher question
+        readLock.V();
     }
 
     public void endRead() {
-        //readLock.P();
+        readLock.P();
             readerCount--;
             if(readerCount == 0) {
               readWriteLock.V();
